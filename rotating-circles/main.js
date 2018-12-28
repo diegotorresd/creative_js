@@ -10,22 +10,27 @@ function setup () {
   frameRate(60)
 }
 
+const circles = []
+
 function draw () {
   t++
   background(255) // clear background
-  rotatingCircle(0.08, 'red')(t)
-  rotatingCircle(0.06, 'green')(t)
-  rotatingCircle(0.04, 'blue')(t)
-  rotatingCircle(0.02, 'magenta')(t)
+  for (let circle of circles) {
+    circle(t)
+  }
 }
 
+function mouseClicked () {
+  circles.push(rotatingCircle(Math.random() * 0.1 + 0.01))
+}
 
 function rotatingCircle (o, color = 0) {
   let x = 50
   let y = 50
-  stroke(color)
-  noFill()
   return function (t) {
+    stroke(color)
+    strokeWeight(Math.ceil(0.75 / o))
+    noFill()  
     let x_ = x + 25 * cos(0.25 * o * t)
     let y_ = y + 25 * sin(0.25 * o * t)
     ellipse(w(x_), h(y_), 80, 80)
