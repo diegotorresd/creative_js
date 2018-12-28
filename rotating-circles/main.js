@@ -21,18 +21,19 @@ function draw () {
 }
 
 function mouseClicked () {
-  circles.push(rotatingCircle(Math.random() * 0.1 + 0.01))
+  circles.push(rotatingCircle(Math.random() * 0.07 + 0.01))
 }
 
-function rotatingCircle (o, color = 0) {
+function rotatingCircle (o) {
   let x = 50
   let y = 50
-  return function (t) {
+  return function (t, color = 0) {
     stroke(color)
     strokeWeight(Math.ceil(0.75 / o))
     noFill()  
     let x_ = x + 25 * cos(0.25 * o * t)
     let y_ = y + 25 * sin(0.25 * o * t)
-    ellipse(w(x_), h(y_), 80, 80)
+    let s = 80
+    ellipse(w(x_), h(y_), s, s)
   }
 }
